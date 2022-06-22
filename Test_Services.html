@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test Ajax Services And Promise</title>
+        <style>
+            .body { margin: auto;}
+            div {
+                border: 1px solid black;
+                background-color: lightblue;
+                padding: 50px;
+                width: 80%;
+                font-size: xx-large;
+                margin-top: 50px;
+            }
+        </style>
+        <script src="../Ajax Async/Http_Services.js"></script>
+    </head>
+    <body>
+        <h1>Test Services Result</h1>
+        <div id="get_services"></div>
+        <div id="delete_services"></div>
+        <div id="post_services"></div>
+        <script>
+            const getElem = document.querySelector("#get_services");
+            const getURl = "http://localhost:3000/employees/1";
+            makePromiseCall("GET", getURl, true)
+                .then(responseText => {
+                    console.log("Get User Data at: " + showTime + " data: " + responseText)
+                })
+                .catch(error => console.log("GET Error Status: " + JSON.stringify(error)));
+                console.log("Made GET AJAX Call to Server at: " + showTime());
+
+            const deleteElem = document.querySelector("#delete_services");    
+            const deleteURl = "http://localhost:3000/employees/4";
+            makePromiseCall("DELETE", deleteURl, false)
+                .then(responseText => {
+                    console.log(" Deleted User at: " + showTime + " data: " + responseText)
+                })
+                .catch(error => console.log("DELETE Error Status: " + JSON.stringify(error)));
+                console.log("Made DELETE AJAX Call to Server at: " + showTime());
+
+            const postElem = document.querySelector("#post_services");
+            const postURl = "http://localhost:3000/employees";
+            const emplData = {"name": "Harry", "salary": "5000"};    
+            makePromiseCall("POST", postURl, true, emplData)
+                .then(responseText => {
+                    console.log("User Data Added: " + showTime + " data: " + responseText)
+                })
+                .catch(error => console.log("POST Error Status: " + JSON.stringify(error)));
+                console.log("Made POST AJAX Call to Server at: " + showTime());
+        </script>
+    </body>
+</html>
